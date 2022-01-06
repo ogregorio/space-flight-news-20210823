@@ -8,7 +8,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   Logger.log(
-    dotenv.config().error ? 'Dotenv file not found.' : 'Using dotenv.',
+    dotenv.config().error ? 'Dotenv file not found' : 'Using dotenv',
     'Environment',
   );
 
