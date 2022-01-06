@@ -1,0 +1,9 @@
+version: "3.9"
+
+services:
+  space-flight-news:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile.dev
+    ports:
+      - "3000:3000"

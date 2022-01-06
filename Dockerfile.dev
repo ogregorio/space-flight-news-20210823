@@ -1,0 +1,18 @@
+# Pull node image from docker registry
+FROM node:17-alpine3.12
+
+# Copy all files
+COPY ./space-flight-news /home/node/space-flight-news
+
+# Set workdir to node user home
+WORKDIR /home/node/space-flight-news
+
+# As root install pnpm and hs2
+RUN npm install -g pnpm
+RUN pnpm add --global nest
+
+# Expose 3000 port
+EXPOSE 3000
+
+# Run application
+CMD pnpm run start:dev
