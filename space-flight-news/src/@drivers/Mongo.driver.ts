@@ -1,8 +1,9 @@
 import { MongoClient as MongoClientDriver } from 'mongodb';
 
-const MongoClient = () => {
+const MongoClient = async () => {
   const uri = process.env.MONGODB_URI;
-  return new MongoClientDriver(uri);
+  const database = await new MongoClientDriver(uri).connect();
+  return database;
 };
 
 export { MongoClient };
