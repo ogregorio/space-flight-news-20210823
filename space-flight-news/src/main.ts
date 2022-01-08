@@ -17,7 +17,15 @@ async function bootstrap() {
     .setDescription('Back-end Challenge 🏅 2021 - Space Flight News')
     .setVersion('1.0')
     .addTag('flight')
-    .addBearerAuth()
+    .setContact(
+      'Arthur Gregório',
+      'https://github.com/ogregorio/',
+      'arthurgregorioleal@mail.com',
+    )
+    .addBearerAuth(
+      { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' },
+      'access-token',
+    )
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

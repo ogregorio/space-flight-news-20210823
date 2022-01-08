@@ -14,7 +14,7 @@ export class AppController {
 
   @Get('sync')
   @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth('JWT-auth')
+  @ApiBearerAuth('access-token')
   getSync() {
     this.appService.getSync();
   }

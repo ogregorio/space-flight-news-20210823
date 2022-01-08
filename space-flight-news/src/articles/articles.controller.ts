@@ -21,7 +21,7 @@ export class ArticlesController {
 
   @Post()
   @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth('JWT-auth')
+  @ApiBearerAuth('access-token')
   create(@Body() article: ArticleDto) {
     return this.articlesService.create(article);
   }
@@ -38,14 +38,14 @@ export class ArticlesController {
 
   @Put(':id')
   @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth('JWT-auth')
+  @ApiBearerAuth('access-token')
   update(@Param('id') id: string, @Body() article: ArticleDto) {
     return this.articlesService.update(id, article);
   }
 
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth('JWT-auth')
+  @ApiBearerAuth('access-token')
   remove(@Param('id') id: string) {
     return this.articlesService.remove(id);
   }
