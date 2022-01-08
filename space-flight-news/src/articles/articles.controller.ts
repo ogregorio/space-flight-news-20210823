@@ -9,6 +9,7 @@ import {
   Put,
   UseGuards,
 } from '@nestjs/common';
+import { ApiBearerAuth } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth-guard';
 import { ArticlesService } from './articles.service';
 import { ArticleDto } from './dto/article.dto';
@@ -20,6 +21,7 @@ export class ArticlesController {
 
   @Post()
   @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth('JWT-auth')
   create(@Body() article: ArticleDto) {
     return this.articlesService.create(article);
   }
@@ -36,12 +38,14 @@ export class ArticlesController {
 
   @Put(':id')
   @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth('JWT-auth')
   update(@Param('id') id: string, @Body() article: ArticleDto) {
     return this.articlesService.update(id, article);
   }
 
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth('JWT-auth')
   remove(@Param('id') id: string) {
     return this.articlesService.remove(id);
   }

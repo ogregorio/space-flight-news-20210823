@@ -17,6 +17,7 @@ async function bootstrap() {
     .setDescription('Back-end Challenge 🏅 2021 - Space Flight News')
     .setVersion('1.0')
     .addTag('flight')
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

@@ -21,7 +21,7 @@ export class ArticleDto {
   @ApiProperty()
   featured?: boolean;
   @ApiProperty()
-  launches?: Array<any>;
+  launches?: Array<{ id: string; provider: string }>;
   @ApiProperty()
-  events?: Array<any>;
+  events?: Array<{ id: string; provider: string }>;
 }
