@@ -7,8 +7,3 @@ services:
       dockerfile: ./Dockerfile.dev
     ports:
       - "3000:3000"
-    environment:
-      MONGODB_URI: mongodb+srv://space-flight-news:pRXrT7aCe3dRmwn@cluster0.ldlxi.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
-      MONGODB_DATABASE: space-flight-news
-      SPACE_FLIGHTS_API_URL: https://api.spaceflightnewsapi.net/v3/
-      SENDGRID_API_KEY: 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

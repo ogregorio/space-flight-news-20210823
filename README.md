@@ -46,6 +46,13 @@ Para execução em ambiente de produção:
 ```bash
 $ npm run build && npm run start:prod
 ```
+Em ambos os casos é necessário inserir as variáveis de ambiente:  
+ 
+- MONGODB_URI (Uri de conexão com o MongoDB)
+- MONGODB_DATABASE (Nome do banco de dados da aplicação)
+- SPACE_FLIGHTS_API_URL(URL da API Space Flight News)
+- SENDGRID_API_KEY (API do SENDGRID)
+- NOTIFICATION_EMAIL (email que receberá as notificações de sincronização do banco de dados)
 
 ## Documentação ##
 Para acessar a documentação da API, se os passos anteriores foram executados com sucesso, o acesso estará disponível em: [http://localhost:3000/api](http://localhost:3000/api)
@@ -60,3 +67,8 @@ $ npm run test
 
 > This is a challenge by Coodesh
 
+# Usuário #
+Para testes, estou disponibilizando o usuário:  
+
+**user**: teste  
+**senha**: testepass  
