@@ -1,13 +1,17 @@
 import { MongoClient as MongoClientDriver } from 'mongodb';
 
-const database = {};
+class MongoClient {
+  mongo: any;
 
-const MongoClient = async () => {
-  if (!!database['client']) return database['client'];
-  const uri = process.env.MONGODB_URI;
-  const mongo = await new MongoClientDriver(uri).connect();
-  database['client'] = mongo.db(process.env.MONGODB_DATABASE);
-  return database['client'];
-};
+  constructor() {
+    const uri = process.env.MONGODB_URI;
+    this.mongo = new MongoClientDriver(uri);
+  }
+
+  async getDb() {
+    await this.mongo.connect();
+    return this.mongo.db(process.env.MONGODB_DATABASE);
+  }
+}
 
 export { MongoClient };
