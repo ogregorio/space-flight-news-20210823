@@ -54,6 +54,12 @@ Em ambos os casos é necessário inserir as variáveis de ambiente:
 - SENDGRID_API_KEY (API do SENDGRID)
 - NOTIFICATION_EMAIL (email que receberá as notificações de sincronização do banco de dados)
 
+# Usuário #
+Para testes, estou disponibilizando o usuário:  
+
+**user**: teste  
+**senha**: testepass 
+ 
 ## Documentação ##
 Para acessar a documentação da API, se os passos anteriores foram executados com sucesso, o acesso estará disponível em: [http://localhost:3000/api](http://localhost:3000/api)
 
@@ -67,8 +73,3 @@ $ npm run test
 
 > This is a challenge by Coodesh
 
-# Usuário #
-Para testes, estou disponibilizando o usuário:  
-
-**user**: teste  
-**senha**: testepass  
