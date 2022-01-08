@@ -1,6 +1,7 @@
 import { Logger } from '@nestjs/common';
 import { MongoClient } from 'src/@drivers/mongo.driver';
 import { articlesService } from 'src/@services/articles.service';
+import { sendMail } from 'src/@services/mail.service';
 
 const synchronizeDatabase = async () => {
   Logger.log('Started syncing database', 'Cron');
@@ -49,10 +50,6 @@ const getConfig = async () => {
     .collection('config')
     .findOne({ name: 'databaseStatus' });
   return config;
-};
-
-const sendMail = () => {
-  console.log('Sending mail');
 };
 
 export { synchronizeDatabase };
