@@ -1,10 +1,10 @@
-import { Article } from '../dto/article.dto';
+import { ArticleDto } from '../dto/article.dto';
 import { CreateArticleSchema } from '../schemas/create-article.schema';
 
-export class CreateArticleDto extends Article {
-  constructor(cDto: Article) {
+export class CreateArticle extends ArticleDto {
+  constructor(article: ArticleDto) {
     super();
-    Object.assign(this, cDto);
+    Object.assign(this, article);
   }
 
   validate(): any {

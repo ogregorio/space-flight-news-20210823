@@ -2,12 +2,12 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ArticlesService } from './articles.service';
 import * as dotenv from 'dotenv';
 import { synchronizeDatabase } from 'src/@tasks/sync.task';
-import { Article } from './dto/article.dto';
+import { ArticleDto } from './dto/article.dto';
 import { ObjectId } from 'mongodb';
 
 describe('ArticlesService', () => {
   let service: ArticlesService;
-  const exampleArticle: Article = {
+  const exampleArticle: ArticleDto = {
     id: -1,
     title: 'Great Test',
     url: 'https://example.com',

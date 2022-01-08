@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth-guard';
 import { ArticlesService } from './articles.service';
-import { Article } from './dto/article.dto';
+import { ArticleDto } from './dto/article.dto';
 import { QueryParamsDto } from './dto/query-params.dto';
 
 @Controller('articles')
@@ -20,7 +20,7 @@ export class ArticlesController {
 
   @Post()
   @UseGuards(JwtAuthGuard)
-  create(@Body() article: Article) {
+  create(@Body() article: ArticleDto) {
     return this.articlesService.create(article);
   }
 
@@ -36,7 +36,7 @@ export class ArticlesController {
 
   @Put(':id')
   @UseGuards(JwtAuthGuard)
-  update(@Param('id') id: string, @Body() article: Article) {
+  update(@Param('id') id: string, @Body() article: ArticleDto) {
     return this.articlesService.update(id, article);
   }
 

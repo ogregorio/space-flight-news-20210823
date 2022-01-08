@@ -6,28 +6,30 @@ import {
 } from '@nestjs/common';
 import { MongoClient } from 'src/@drivers/mongo.driver';
 import { ObjectId } from 'mongodb';
-import { Article } from './dto/article.dto';
-import { CreateArticleDto } from './entities/create-article.entity';
-import { UpdateArticleDto } from './entities/update-article.entity';
+import { ArticleDto } from './dto/article.dto';
+import { CreateArticle } from './entities/create-article.entity';
+import { UpdateArticle } from './entities/update-article.entity';
 
 @Injectable()
 export class ArticlesService {
-  async create(article: Article): Promise<{ insertedId: string }> {
+  async create(article: ArticleDto): Promise<{ insertedId: string }> {
     const database = await new MongoClient().getDb();
-    const cDto: CreateArticleDto = new CreateArticleDto(article);
-    if (cDto.isValid()) {
+    const createArticle: CreateArticle = new CreateArticle(article);
+    if (createArticle.isValid()) {
       try {
-        return await database.collection('articles').insertOne(cDto);
+        return await database.collection('articles').insertOne(createArticle);
       } catch (e) {
         throw new InternalServerErrorException('Failed at write to database');
       }
     }
-    throw new BadRequestException(cDto.validate().error.details[0].message);
+    throw new BadRequestException(
+      createArticle.validate().error.details[0].message,
+    );
   }
 
-  async findAll(skip: number, limit = 10): Promise<Article[]> {
+  async findAll(skip: number, limit = 10): Promise<ArticleDto[]> {
     const database = await new MongoClient().getDb();
-    const articles: Article[] = [];
+    const articles: ArticleDto[] = [];
     try {
       Object.assign(
         articles,
@@ -45,9 +47,9 @@ export class ArticlesService {
     }
   }
 
-  async findOne(id: string): Promise<Article> {
+  async findOne(id: string): Promise<ArticleDto> {
     const database = await new MongoClient().getDb();
-    const article: Article = new Article();
+    const article: ArticleDto = new ArticleDto();
     try {
       Object.assign(
         article,
@@ -64,10 +66,10 @@ export class ArticlesService {
 
   async update(
     id: string,
-    article: Article,
+    article: ArticleDto,
   ): Promise<{ modifiedCount: number }> {
     const database = await new MongoClient().getDb();
-    const uDto: UpdateArticleDto = new UpdateArticleDto(id, article);
+    const uDto: UpdateArticle = new UpdateArticle(id, article);
     if (uDto.isValid()) {
       try {
         const filter = { _id: new ObjectId(id) };

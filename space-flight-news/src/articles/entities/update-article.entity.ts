@@ -1,10 +1,10 @@
-import { Article } from '../dto/article.dto';
+import { ArticleDto } from '../dto/article.dto';
 import { UpdateArticleSchema } from '../schemas/update-article.schema';
 
-export class UpdateArticleDto extends Article {
-  constructor(_id: string, uDto: Article) {
+export class UpdateArticle extends ArticleDto {
+  constructor(_id: string, article: ArticleDto) {
     super();
-    Object.assign(this, uDto);
+    Object.assign(this, article);
   }
 
   validate(): any {
