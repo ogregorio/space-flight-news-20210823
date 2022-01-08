@@ -1,27 +1,27 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class Article {
-  _id: string;
+  _id?: string;
   @ApiProperty()
-  id: number;
+  id?: number;
   @ApiProperty()
-  title: string;
+  title?: string;
   @ApiProperty()
-  url: string;
+  url?: string;
   @ApiProperty()
-  imageUrl: string;
+  imageUrl?: string;
   @ApiProperty()
-  newsSite: string;
+  newsSite?: string;
   @ApiProperty()
-  summary: string;
+  summary?: string;
   @ApiProperty()
-  publishedAt: string;
+  publishedAt?: string;
   @ApiProperty()
-  updateAt: string;
+  updatedAt?: string;
   @ApiProperty()
-  featured: boolean;
+  featured?: boolean;
   @ApiProperty()
-  launches: Array<any>;
+  launches?: Array<any>;
   @ApiProperty()
-  events: Array<any>;
+  events?: Array<any>;
 }

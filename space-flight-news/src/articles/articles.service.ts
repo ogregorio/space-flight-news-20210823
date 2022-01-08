@@ -12,8 +12,8 @@ import { UpdateArticleDto } from './entities/update-article.entity';
 
 @Injectable()
 export class ArticlesService {
-  async create(article: Article) {
-    const database = await MongoClient();
+  async create(article: Article): Promise<{ insertedId: string }> {
+    const database = await new MongoClient().getDb();
     const cDto: CreateArticleDto = new CreateArticleDto(article);
     if (cDto.isValid()) {
       try {
@@ -26,7 +26,7 @@ export class ArticlesService {
   }
 
   async findAll(skip: number, limit = 10): Promise<Article[]> {
-    const database = await MongoClient();
+    const database = await new MongoClient().getDb();
     const articles: Article[] = [];
     try {
       Object.assign(
@@ -38,14 +38,15 @@ export class ArticlesService {
           .limit(Number(limit) || 100)
           .toArray(),
       );
+      if (!!articles) return articles;
+      throw new NotFoundException('Articles not found');
     } catch (error) {
       throw new InternalServerErrorException('Internal Server Error');
     }
-    return articles;
   }
 
   async findOne(id: string): Promise<Article> {
-    const database = await MongoClient();
+    const database = await new MongoClient().getDb();
     const article: Article = new Article();
     try {
       Object.assign(
@@ -61,8 +62,11 @@ export class ArticlesService {
     }
   }
 
-  async update(id: string, article: Article) {
-    const database = await MongoClient();
+  async update(
+    id: string,
+    article: Article,
+  ): Promise<{ modifiedCount: number }> {
+    const database = await new MongoClient().getDb();
     const uDto: UpdateArticleDto = new UpdateArticleDto(id, article);
     if (uDto.isValid()) {
       try {
@@ -77,8 +81,8 @@ export class ArticlesService {
     throw new BadRequestException(uDto.validate().error.details[0].message);
   }
 
-  async remove(id: string) {
-    const database = await MongoClient();
+  async remove(id: string): Promise<{ message: string }> {
+    const database = await new MongoClient().getDb();
     try {
       const res = await database
         .collection('articles')
