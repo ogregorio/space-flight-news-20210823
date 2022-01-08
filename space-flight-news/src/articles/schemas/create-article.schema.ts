@@ -10,8 +10,18 @@ const CreateArticleSchema = Joi.object({
   publishedAt: Joi.string().isoDate().required(),
   updatedAt: Joi.string().isoDate().required(),
   featured: Joi.boolean().required(),
-  launches: Joi.array(),
-  events: Joi.array(),
+  launches: Joi.array().items(
+    Joi.object({
+      id: Joi.string(),
+      provider: Joi.string(),
+    }),
+  ),
+  events: Joi.array().items(
+    Joi.object({
+      id: Joi.string(),
+      provider: Joi.string(),
+    }),
+  ),
 });
 
 export { CreateArticleSchema };

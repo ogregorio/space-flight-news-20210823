@@ -10,8 +10,18 @@ const UpdateArticleSchema = Joi.object({
   publishedAt: Joi.string().isoDate(),
   updatedAt: Joi.string().isoDate(),
   featured: Joi.boolean(),
-  launches: Joi.array(),
-  events: Joi.array(),
+  launches: Joi.array().items(
+    Joi.object({
+      id: Joi.string(),
+      provider: Joi.string(),
+    }),
+  ),
+  events: Joi.array().items(
+    Joi.object({
+      id: Joi.string(),
+      provider: Joi.string(),
+    }),
+  ),
 });
 
 export { UpdateArticleSchema };
