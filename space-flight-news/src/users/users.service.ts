@@ -11,7 +11,7 @@ import { User } from './entities/create-user.entity';
 export class UsersService {
   async create(username: string, password: string) {
     const exists = await this.findOne(username);
-    if (exists) {
+    if (!exists) {
       const user: User = new User(username, password);
       const database = await new MongoClient().getDb();
       try {
@@ -32,7 +32,7 @@ export class UsersService {
         user,
         await database.collection('users').findOne({ username: username }),
       );
-      return !!user ? user : undefined;
+      return user.username ? user : undefined;
     } catch (err) {
       return undefined;
     }
