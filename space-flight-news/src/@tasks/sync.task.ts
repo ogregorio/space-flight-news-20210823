@@ -4,7 +4,7 @@ import { articlesService } from 'src/@services/articles.service';
 
 const synchronizeDatabase = async () => {
   Logger.log('Started syncing database', 'Cron');
-  const database = await MongoClient();
+  const database = await new MongoClient().getDb();
   const articles = await getArticles();
   if (!!articles) {
     database.collection('articles').insertMany(articles, (err, result) => {
@@ -36,7 +36,7 @@ const getArticles = async () => {
 };
 
 const saveNewConfig = async (lastarticlesId) => {
-  const database = await MongoClient();
+  const database = await new MongoClient().getDb();
   const query = { name: 'databaseStatus' };
   const update = { $set: { lastarticlesId: lastarticlesId } };
   const options = { upsert: true };
@@ -44,7 +44,7 @@ const saveNewConfig = async (lastarticlesId) => {
 };
 
 const getConfig = async () => {
-  const database = await MongoClient();
+  const database = await new MongoClient().getDb();
   const config = await database
     .collection('config')
     .findOne({ name: 'databaseStatus' });

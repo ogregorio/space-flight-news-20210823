@@ -14,8 +14,10 @@ describe('UsersService', () => {
 
     service = module.get<UsersService>(UsersService);
     try {
-      service.create('teste', 'testepass');
-    } catch (e) {}
+      await service.findOne('teste');
+    } catch (e) {
+      await service.create('teste', 'testepass');
+    }
   });
 
   describe('findOne - teste user', () => {
@@ -23,12 +25,10 @@ describe('UsersService', () => {
       const response: UserDto = await service.findOne('teste');
       expect(response.username).toBe('teste');
     });
-  });
 
-  describe('findOne - user not found', () => {
-    it('should find one user', async () => {
+    it('should not find one user', async () => {
       const response = await service.findOne(Date.now().toString());
-      expect(response).toMatchObject({});
+      expect(response).toBe(undefined);
     });
   });
 });
