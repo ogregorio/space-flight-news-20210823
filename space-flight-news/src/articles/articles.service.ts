@@ -57,7 +57,7 @@ export class ArticlesService {
           .collection('articles')
           .findOne({ _id: new ObjectId(id) }),
       );
-      if (!!article) return article;
+      if (article.id) return article;
       throw new NotFoundException('Article not found');
     } catch (e) {
       throw new NotFoundException('The requested article was not found');
